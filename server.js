@@ -16,11 +16,8 @@ app.post("/replicate", async (req, res) => {
     body: req.body,
   });
 
-  req.body.output.forEach(async (output) => {
-    const now = new Date();
-    const fileType = output.substring(output.lastIndexOf(".") + 1);
-    const outputPath = path.resolve("./output", `${now.getTime()}.${fileType}`);
-    await downloadFile(output, outputPath);
+  req.body.output.forEach(async (url) => {
+    await downloadFile(url);
   });
 
   res.json({ status: "ACCEPTED" });
