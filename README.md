@@ -45,7 +45,9 @@ npm start
 
 ## Trigger an email with Resend
 
-Create a new connection.
+In addition to receiving the result from Replicate on your server, you can also connect to other third-party services. For example, you can trigger an email using [Resend](https://resend.com?ref=github-hookdeck-replicate)
+
+Begin by creating a new connection.
 
 - Name the destination, `resend`.
 - Set the URL to `https://api.resend.com/emails`.
