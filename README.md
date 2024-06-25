@@ -12,7 +12,7 @@ This application is a Node.js application that uses Replicate to run AI models w
   npm i -g hookdeck-cli
   ```
 - Sign up for a [free Hookdeck account](https://dashboard.hookdeck.com/signup?ref=github-hookdeck-replicate-demo).
-- Grab a Replicate API token from [replicate.com/account](http://replicate.com/account) and set it as an environment variable in a `.env` file:
+- Grab a Replicate API token from [replicate.com/account](https://replicate.com/account) and set it as an environment variable in a `.env` file:
   ```console
   export REPLICATE_API_TOKEN=...
   ```
