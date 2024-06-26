@@ -30,6 +30,8 @@ All of these scenarios represent the need to manage asynchronous messaging.
 
 ### Replicate & Resend
 
-Generate images with Replicate](https://replicate.com), receive the images on localhost, and in parallel send an email with an image with [Resend](https://resend.com).
+Generate images with [Replicate](https://replicate.com), receive the images on localhost, and in parallel send an email with an image with [Resend](https://resend.com).
+
+![Hookdeck connection: Replicate to Resend and the Hookdeck CLI](docs/replicate-resend-connection.png)
 
 ➡️ [Replicate & Resend example](examples/replicate-resend/)
