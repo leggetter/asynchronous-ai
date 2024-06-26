@@ -1,77 +1,35 @@
-# Hookdeck with Replicate Webhooks Demo
+# Asynchronous APIs with Hookdeck
 
-![Hookdeck + Replicate AI](docs/hookdeck-replicate.png)
+There are many use cases where we're not trying to build real-time ChatGPT-like experiences, so the underlying technology should support asynchronous mechanisms such as callback to enable applications to work more efficiently. 
 
-This application is a Node.js application that uses Replicate to run AI models with [Replicate's API](https://replicate.com/docs/get-started/nodejs).
+Examples include:
 
-## Before you begin
+- Processing or generating large text documents, images, or video.
+- Batch processing inputs.
+- Piping the output from an AI process to another service with no synchronous response required.
 
-- Node.js 18 or later. The simplest way to install it is using the installer at [nodejs.org](https://nodejs.org/).
-- Install the [Hookdeck CLI](https://github.com/hookdeck/hookdeck-cli):
-  ```bash
-  npm i -g hookdeck-cli
-  ```
-- Sign up for a [free Hookdeck account](https://dashboard.hookdeck.com/signup?ref=github-hookdeck-replicate-demo).
-- Grab a Replicate API token from [replicate.com/account](https://replicate.com/account) and set it as an environment variable in a `.env` file:
-  ```console
-  export REPLICATE_API_TOKEN=...
-  ```
-- Install the application dependencies:
-  ```bash
-  npm i
-  ```
+In these situations, you don't want to hold a connection open to an API and await a response. Instead, you want to receive a callback when the process has completed.
 
-## Run the app
+All of these scenarios represent the need to manage asynchronous messaging.
 
-Run the server:
+## AI platforms with Asynchronous AI support
 
-```bash
-npm run server
-```
+- [Replicate](https://replicate.com/docs/webhooks?ref=github-asynchronous-ai): webhook callbacks for persisting prediction data and files, sending notifications when long-running predictions finish, and creating model pipelines.
+- [AssemblyAI](https://www.assemblyai.com/docs/getting-started/webhooks?ref=github-asynchronous-ai): get notified when your transcripts are ready.
+- [Deepgram](https://developers.deepgram.com/docs/using-callbacks-to-return-transcripts-to-your-server#what-is-a-webhook?ref=github-asynchronous-ai): return transcripts to a callback URL sent to Deepgram's API.
 
-Run the Hookdeck CLI:
+## AI adjacent platforms that enable Asynchronous AI
 
-```bash
-hookdeck listen 3030 replicate
-```
+- [Hookdeck](https://hookdeck.com?ref=github-asynchronous-ai) is an event gateway platform that supports ingesting events from platforms, localhost development, and routing events to other services.
+- [Resend](https://resend.com/docs/dashboard/webhooks/introduction?ref=github-asynchronous-ai): Email API that developers love offering webhook callbacks for various email events.
+- Twilio
+  - [Programmable SMS](https://www.twilio.com/docs/usage/webhooks/messaging-webhooks?ref=github-asynchronous-ai): Webhooks for inbound SMS. Note that to support asynchronous workflows, you'll need to follow the "Messaging without responding" workflow.
+  - [Programmable Voice](https://www.twilio.com/docs/usage/webhooks/voice-webhooks?ref=github-asynchronous-ai): notifications about call status progress and trigger call workflows via webhook callbacks.
 
-When prompted, enter `/replicate` as the path.
+## Examples
 
-Run the application to trigger the image generation:
+### Replicate & Resend
 
-```bash
-npm start
-```
+Generate images with Replicate](https://replicate.com), receive the images on localhost, and in parallel send an email with an image with [Resend](https://resend.com).
 
-## Trigger an email with Resend
-
-In addition to receiving the result from Replicate on your server, you can also connect to other third-party services. For example, you can trigger an email using [Resend](https://resend.com?ref=github-hookdeck-replicate)
-
-Begin by creating a new connection.
-
-- Name the destination, `resend`.
-- Set the URL to `https://api.resend.com/emails`.
-- Update the authentication to use **Bearer Token** and set the **Bearer Token** as the Resend API Key.
-- Disable **Path Forwarding**
-
-![Destination config](docs/destination-config.png)
-
-- Add a Transformation to the connection. Save the Transformation and the Connection:
-
-  ```
-  addHandler('transform', (request, context) => {
-    request.body = {
-      from: 'Image Thing <onboarding@resend.dev>',
-      to: ['phil@leggetter.co.uk'],
-      subject: 'hello world',
-      html: `<strong>${request.body.input.prompt}<br />
-        <img src="${request.body.output[0]}" /></strong>`,
-    };
-
-    return request;
-  });
-  ```
-
-  The Hookdeck Connections should look as follows:
-
-![Connections](docs/connections.png)
+➡️ [Replicate & Resend example](examples/replicate-resend/)

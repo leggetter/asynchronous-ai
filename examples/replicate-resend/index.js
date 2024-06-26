@@ -1,6 +1,6 @@
 import Replicate from "replicate";
 import dotenv from "dotenv";
-import downloadFile from "./utils.js";
+import downloadFile from "../../examples/replicate-resend/utils.js";
 dotenv.config();
 
 const replicate = new Replicate({
