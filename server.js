@@ -22,15 +22,6 @@ app.post("/replicate", async (req, res) => {
   res.json({ status: "ACCEPTED" });
 });
 
-app.post("/resend", async (req, res) => {
-  console.log({
-    resend_webhook_received: new Date().toISOString(),
-    body: req.body,
-  });
-
-  res.json({ status: "ACCEPTED" });
-});
-
 app.listen(port, () => {
   console.log(`🪝 Server running at http://localhost:${port}`);
 });
