@@ -14,7 +14,7 @@ const input = {
   width: 768,
   height: 768,
   prompt:
-    "An anime style picture of two happy software engineers. They are in Barcelona, Spain, at a technology conference and are winning a prize. cinematic, dramatic",
+    "An dramatic anime style picture of three happy software engineers, boys and girls. They are in Barcelona, Spain, at a HackBCN hackaton. Thet hold a lego prize. Show they are in an anime style sagrada familia ",
   refine: "expert_ensemble_refiner",
   scheduler: "K_EULER",
   lora_scale: 0.6,
@@ -29,15 +29,15 @@ const input = {
 
 console.log("Running...");
 
-const output = await replicate.run(model, { input });
-output.forEach(async (url) => {
-  await downloadFile(url);
-});
-
-// const output = await replicate.predictions.create({
-//   model,
-//   webhook: "https://hkdk.events/ca96xo5b2luo7p/replicate",
-//   input,
+// const output = await replicate.run(model, { input });
+// output.forEach(async (url) => {
+//   await downloadFile(url);
 // });
+
+const output = await replicate.predictions.create({
+  model,
+  webhook: "https://hkdk.events/d8bdidf8736hj6",
+  input,
+});
 
 console.log("Done!", output);
