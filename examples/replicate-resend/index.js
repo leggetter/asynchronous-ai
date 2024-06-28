@@ -14,7 +14,7 @@ const input = {
   width: 768,
   height: 768,
   prompt:
-    "An dramatic anime style picture of three happy software engineers, boys and girls. They are in Barcelona, Spain, at a HackBCN hackaton. Thet hold a lego prize. Show they are in an anime style sagrada familia ",
+    "A dramatic anime style picture of three happy software engineers, of varying genders. They are in Barcelona, Spain, at a HackBCN hackathon in a technology conference building. They hold a lego prize. Show they are in an anime style sagrada familia",
   refine: "expert_ensemble_refiner",
   scheduler: "K_EULER",
   lora_scale: 0.6,
@@ -36,7 +36,7 @@ console.log("Running...");
 
 const output = await replicate.predictions.create({
   model,
-  webhook: "https://hkdk.events/d8bdidf8736hj6",
+  webhook: process.env.HOOKDECK_REPLICATE_SOURCE_URL,
   input,
 });
 
